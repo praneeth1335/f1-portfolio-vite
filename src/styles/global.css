@@ -1,0 +1,358 @@
+:root {
+  --primary: #fff;
+  --secondary: #00d2be;
+  --accent-silver: #c0c0c0;
+  --bg-dark: #0a0a0a;
+  --card-dark: #141414;
+  --border: #333;
+  --text-light: #fff;
+  --text-muted: #a0a0a0;
+  --fastest-lap: #8a2be2;
+  --glow: 0 0 15px rgba(0, 210, 190, 0.5), 0 0 5px rgba(0, 210, 190, 0.3);
+  --glow-silver: 0 0 15px rgba(192, 192, 192, 0.5),
+    0 0 5px rgba(192, 192, 192, 0.3);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --tyre-soft: #00d2be;
+  --tyre-medium: #f9f200;
+  --tyre-hard: #fff;
+  --btn-blue: #007bff;
+  --btn-yellow: #ffc107;
+  --btn-purple: #9a34ff;
+  --btn-green: #00ff00;
+  --font: "Exo 2", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text-light);
+  background: #131313 radial-gradient(ellipse at center, #222 0%, #0a0a0a 100%)
+    fixed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ================= HEADER ================= */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding: 1rem 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.logo {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-dark);
+  border: 2px solid var(--border);
+  font-weight: 800;
+  transition: var(--transition);
+}
+.logo:hover {
+  border-color: var(--secondary);
+  box-shadow: var(--glow);
+  color: var(--secondary);
+}
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.nav a {
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.nav a:hover {
+  color: var(--primary);
+}
+
+/* ================= BUTTONS ================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  border-radius: 6px;
+  background: var(--secondary);
+  color: #000;
+  border: 2px solid var(--secondary);
+  transition: var(--transition);
+  cursor: pointer;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--glow);
+  background: #00f5d4;
+  border-color: #00f5d4;
+}
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.btn-outline:hover {
+  background: var(--primary);
+  color: #000;
+}
+
+/* ================= SECTIONS ================= */
+.section {
+  padding: 6.5rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: 80px;
+}
+.section-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0 0 2rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+}
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 60px;
+  height: 4px;
+  background: var(--secondary);
+  box-shadow: var(--glow);
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2rem 0;
+  margin-bottom: 70px;
+}
+
+/* ================= PRELOADER / LIGHTS OUT ================= */
+#lights-out {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  z-index: 1000;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+#lights-container {
+  display: flex;
+  gap: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.light {
+  width: 70px;
+  height: 70px;
+  background: #333;
+  border-radius: 50%;
+  border: 2px solid #111;
+}
+.light.on {
+  background: var(--secondary);
+  box-shadow: var(--glow);
+}
+#preloader-text {
+  color: var(--text-muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* ================= SPEED LINES ================= */
+#speed-lines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 900;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08) 0 1px,
+    transparent 1px 18px
+  );
+  background-position: 0 0;
+  animation: scroll-speed 10s linear infinite;
+  animation-play-state: paused;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+@keyframes scroll-speed {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -1000px;
+  }
+}
+
+/* ================= DRS FRAME ================= */
+body.drs-active::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  border: 4px solid var(--secondary);
+  box-shadow: 0 0 20px 5px var(--secondary), inset 0 0 20px 5px var(--secondary);
+  z-index: 800;
+  pointer-events: none;
+  animation: pulse 1s infinite;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ================= DASHBOARD HUD ================= */
+.f1-dash {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  z-index: 700;
+  background: rgba(10, 10, 10, 0.9);
+  border-top: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.dash-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.dash-label {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* ================= LAP TRACKER LEFT ================= */
+.lap-tracker {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 16px;
+  width: 60px;
+  height: 300px;
+  z-index: 600;
+}
+#lap-path-bg {
+  fill: none;
+  stroke: #444;
+  stroke-width: 6;
+}
+#lap-path {
+  fill: none;
+  stroke: var(--secondary);
+  stroke-width: 6;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 0.1s linear;
+}
+#car-marker {
+  fill: #fff;
+  stroke: var(--secondary);
+  stroke-width: 2;
+}
+
+/* ================= HERO ================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 6rem;
+}
+.hero-grid {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  width: 100%;
+}
+.hero h1 {
+  font-size: 4rem;
+  margin: 0.5rem 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.tagline {
+  color: var(--text-muted);
+  max-width: 560px;
+}
+
+/* ================= TRACK MAP ================= */
+.track-map {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: radial-gradient(circle at 30% 20%, #1f1f1f 0%, #0e0e0e 60%);
+}
+.track-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.map-dot {
+  fill: #fff;
+  stroke: var(--secondary);
+  stroke-width: 2;
+  r: 6;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .nav {
+    display: none;
+  }
+  .hero h1 {
+    font-size: 3.2rem;
+  }
+}
